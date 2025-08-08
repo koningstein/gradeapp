@@ -12,6 +12,7 @@ namespace GradeApp.Models
         public double GroupWeight { get; set; } // Gewicht voor cijferberekening (0.0 - 1.0)
         public int CanvasId { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime? UpdatedAt { get; set; }
 
         // Foreign Key - bij welke course hoort deze group
         public int CourseId { get; set; }
