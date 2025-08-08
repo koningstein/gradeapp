@@ -9,7 +9,8 @@ namespace GradeApp.Models
         public string Name { get; set; } = string.Empty; // bijv. "Programmeren 1"
         public string Code { get; set; } = string.Empty; // bijv. "PROG1"
         public int CanvasId { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
         // Navigation properties - een course heeft meerdere assignment groups
         public virtual ICollection<AssignmentGroup> AssignmentGroups { get; set; } = new List<AssignmentGroup>();

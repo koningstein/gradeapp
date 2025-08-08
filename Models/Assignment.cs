@@ -12,6 +12,7 @@ namespace GradeApp.Models
         public double Points { get; set; } // Maximaal aantal punten
         public int CanvasId { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime? UpdatedAt { get; set; }
 
         // Foreign Keys - assignment hoort bij course EN assignment group
         public int CourseId { get; set; }
