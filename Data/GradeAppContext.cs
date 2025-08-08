@@ -1,5 +1,6 @@
 ﻿using GradeApp.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using System;
 using System.IO;
 using System.Linq;
@@ -8,6 +9,28 @@ using System.Threading.Tasks;
 
 namespace GradeApp.Data
 {
+    // Design-time factory voor EF migrations (BELANGRIJK!)
+    public class GradeAppContextFactory : IDesignTimeDbContextFactory<GradeAppContext>
+    {
+        public GradeAppContext CreateDbContext(string[] args)
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<GradeAppContext>();
+
+            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            string dbPath = Path.Combine(appDataPath, "GradeApp", "gradeapp.db");
+
+            var directory = Path.GetDirectoryName(dbPath);
+            if (!string.IsNullOrEmpty(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+
+            optionsBuilder.UseSqlite($"Data Source={dbPath}");
+
+            return new GradeAppContext(optionsBuilder.Options);
+        }
+    }
+
     public class GradeAppContext : DbContext
     {
         // DbSets - je "tabellen"
@@ -38,8 +61,6 @@ namespace GradeApp.Data
                 optionsBuilder.LogTo(Console.WriteLine);
             }
         }
-
-        // Geen OnModelCreating meer nodig! Models configureren zichzelf 🎉
 
         // Timestamps (zoals Laravel)
         public override int SaveChanges()
