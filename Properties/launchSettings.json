@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "GradeApp (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "GradeApp (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
